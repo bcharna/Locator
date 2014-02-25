@@ -14,7 +14,7 @@
 
 //@property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *currentLocation;
-@property (nonatomic, strong) UIBarButtonItem *submitButton;
+@property (nonatomic, strong) UIBarButtonItem *saveButton;
 @property (strong, nonatomic) IBOutlet UITextField *nameField;
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;

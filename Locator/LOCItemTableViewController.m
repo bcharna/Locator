@@ -22,6 +22,7 @@
     self = [super initWithStyle:style];
     if (self) {
       self.items = [NSMutableArray array];
+      self.title = @"Locator";
     }
     return self;
 }
@@ -35,6 +36,12 @@
 
 - (void) loadTableData
 {
+  [self reloadItems];
+  [self.tableView reloadData];
+}
+
+- (void) reloadItems
+{
   NSManagedObjectContext *context = self.managedObjectContext;
   NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
   NSEntityDescription *entity = [NSEntityDescription entityForName:@"LOCItem"
@@ -42,14 +49,12 @@
   [fetchRequest setEntity:entity];
   NSError *error = nil;
   self.items = [context executeFetchRequest:fetchRequest error:&error];
-  [self.tableView reloadData];
 }
-
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  UIBarButtonItem *newItemButton = [[UIBarButtonItem alloc] initWithTitle:@"New Item" style:UIBarButtonItemStylePlain target:self action:@selector(getNewItem:)];
+  UIBarButtonItem *newItemButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(getNewItem:)];
   self.navigationItem.rightBarButtonItem = newItemButton;
   [self.tableView registerNib:[UINib nibWithNibName:@"LOCItemCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"ItemCell"];
 }
@@ -99,28 +104,27 @@
   
 }
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+      LOCItem *item = [self.items objectAtIndex:indexPath.row];
+      [tableView beginUpdates];
+      [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+      [self.managedObjectContext deleteObject:item];
+      [self.managedObjectContext save:nil];
+      [self reloadItems];
+      [tableView endUpdates];
+    }
 }
-*/
 
 /*
 // Override to support rearranging the table view.

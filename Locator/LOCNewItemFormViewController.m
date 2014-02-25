@@ -36,9 +36,11 @@
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
     self.nameField.delegate = self;
-    self.submitButton = [[UIBarButtonItem alloc] initWithTitle:@"Submit" style:UIBarButtonItemStylePlain target:self action:@selector(submit:)];
-    [self.submitButton setEnabled:NO];
-    self.navigationItem.rightBarButtonItem = self.submitButton;
+
+    self.saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(submit:)];
+
+    [self.saveButton setEnabled:NO];
+    self.navigationItem.rightBarButtonItem = self.saveButton;
 }
 
 - (void)submit:(id) sender
@@ -64,7 +66,7 @@
   mapRegion.span.latitudeDelta = 0.005;
   mapRegion.span.longitudeDelta = 0.005;
   [mapView setRegion:mapRegion animated: YES];
-  [self.submitButton setEnabled:YES];
+  [self.saveButton setEnabled:YES];
 }
 
 //- (void)locationManager:(CLLocationManager *)locationManager didUpdateLocations:(NSArray *)locations
