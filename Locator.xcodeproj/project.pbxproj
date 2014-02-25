@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		566383D318BC02F600E81E2C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 566383D218BC02F600E81E2C /* CoreLocation.framework */; };
+		5675992318BC17ED00EF4C4B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5675992218BC17ED00EF4C4B /* MapKit.framework */; };
+		5675992718BC274F00EF4C4B /* LOCItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5675992518BC274F00EF4C4B /* LOCItemViewController.m */; };
+		5675992818BC274F00EF4C4B /* LOCItemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5675992618BC274F00EF4C4B /* LOCItemViewController.xib */; };
+		567B876C18BC08B00003DFA1 /* LOCNewItemFormViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 567B876B18BC08B00003DFA1 /* LOCNewItemFormViewController.xib */; };
+		567B877518BC0B610003DFA1 /* LOCItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 567B877418BC0B610003DFA1 /* LOCItemCell.m */; };
+		567B877918BC0C290003DFA1 /* LOCItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 567B877818BC0C290003DFA1 /* LOCItemCell.xib */; };
 		56B1220118BBFCB900B6C0D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56B1220018BBFCB900B6C0D6 /* Foundation.framework */; };
 		56B1220318BBFCB900B6C0D6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56B1220218BBFCB900B6C0D6 /* CoreGraphics.framework */; };
 		56B1220518BBFCB900B6C0D6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56B1220418BBFCB900B6C0D6 /* UIKit.framework */; };
@@ -19,6 +26,9 @@
 		56B1221C18BBFCB900B6C0D6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56B1220418BBFCB900B6C0D6 /* UIKit.framework */; };
 		56B1222418BBFCB900B6C0D6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 56B1222218BBFCB900B6C0D6 /* InfoPlist.strings */; };
 		56B1222618BBFCB900B6C0D6 /* LocatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B1222518BBFCB900B6C0D6 /* LocatorTests.m */; };
+		56B1223118BBFD2700B6C0D6 /* LOCItemTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B1223018BBFD2700B6C0D6 /* LOCItemTableViewController.m */; };
+		56B1223418BBFEE600B6C0D6 /* LOCNewItemFormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B1223318BBFEE600B6C0D6 /* LOCNewItemFormViewController.m */; };
+		56B1223718BBFFC800B6C0D6 /* LOCItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 56B1223618BBFFC800B6C0D6 /* LOCItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +42,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		566383D218BC02F600E81E2C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5675992218BC17ED00EF4C4B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		5675992418BC274F00EF4C4B /* LOCItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOCItemViewController.h; sourceTree = "<group>"; };
+		5675992518BC274F00EF4C4B /* LOCItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOCItemViewController.m; sourceTree = "<group>"; };
+		5675992618BC274F00EF4C4B /* LOCItemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LOCItemViewController.xib; sourceTree = "<group>"; };
+		567B876B18BC08B00003DFA1 /* LOCNewItemFormViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LOCNewItemFormViewController.xib; sourceTree = "<group>"; };
+		567B877318BC0B610003DFA1 /* LOCItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOCItemCell.h; sourceTree = "<group>"; };
+		567B877418BC0B610003DFA1 /* LOCItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOCItemCell.m; sourceTree = "<group>"; };
+		567B877818BC0C290003DFA1 /* LOCItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LOCItemCell.xib; sourceTree = "<group>"; };
 		56B121FD18BBFCB900B6C0D6 /* Locator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Locator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56B1220018BBFCB900B6C0D6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		56B1220218BBFCB900B6C0D6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -48,6 +67,12 @@
 		56B1222118BBFCB900B6C0D6 /* LocatorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LocatorTests-Info.plist"; sourceTree = "<group>"; };
 		56B1222318BBFCB900B6C0D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		56B1222518BBFCB900B6C0D6 /* LocatorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocatorTests.m; sourceTree = "<group>"; };
+		56B1222F18BBFD2700B6C0D6 /* LOCItemTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOCItemTableViewController.h; sourceTree = "<group>"; };
+		56B1223018BBFD2700B6C0D6 /* LOCItemTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOCItemTableViewController.m; sourceTree = "<group>"; };
+		56B1223218BBFEE600B6C0D6 /* LOCNewItemFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOCNewItemFormViewController.h; sourceTree = "<group>"; };
+		56B1223318BBFEE600B6C0D6 /* LOCNewItemFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOCNewItemFormViewController.m; sourceTree = "<group>"; };
+		56B1223518BBFFC800B6C0D6 /* LOCItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOCItem.h; sourceTree = "<group>"; };
+		56B1223618BBFFC800B6C0D6 /* LOCItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOCItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +80,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5675992318BC17ED00EF4C4B /* MapKit.framework in Frameworks */,
+				566383D318BC02F600E81E2C /* CoreLocation.framework in Frameworks */,
 				56B1220318BBFCB900B6C0D6 /* CoreGraphics.framework in Frameworks */,
 				56B1220518BBFCB900B6C0D6 /* UIKit.framework in Frameworks */,
 				56B1220118BBFCB900B6C0D6 /* Foundation.framework in Frameworks */,
@@ -96,6 +123,8 @@
 		56B121FF18BBFCB900B6C0D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5675992218BC17ED00EF4C4B /* MapKit.framework */,
+				566383D218BC02F600E81E2C /* CoreLocation.framework */,
 				56B1220018BBFCB900B6C0D6 /* Foundation.framework */,
 				56B1220218BBFCB900B6C0D6 /* CoreGraphics.framework */,
 				56B1220418BBFCB900B6C0D6 /* UIKit.framework */,
@@ -107,9 +136,22 @@
 		56B1220618BBFCB900B6C0D6 /* Locator */ = {
 			isa = PBXGroup;
 			children = (
+				56B1221218BBFCB900B6C0D6 /* Images.xcassets */,
 				56B1220F18BBFCB900B6C0D6 /* LOCAppDelegate.h */,
 				56B1221018BBFCB900B6C0D6 /* LOCAppDelegate.m */,
-				56B1221218BBFCB900B6C0D6 /* Images.xcassets */,
+				56B1223518BBFFC800B6C0D6 /* LOCItem.h */,
+				56B1223618BBFFC800B6C0D6 /* LOCItem.m */,
+				567B877318BC0B610003DFA1 /* LOCItemCell.h */,
+				567B877418BC0B610003DFA1 /* LOCItemCell.m */,
+				567B877818BC0C290003DFA1 /* LOCItemCell.xib */,
+				56B1222F18BBFD2700B6C0D6 /* LOCItemTableViewController.h */,
+				56B1223018BBFD2700B6C0D6 /* LOCItemTableViewController.m */,
+				5675992418BC274F00EF4C4B /* LOCItemViewController.h */,
+				5675992518BC274F00EF4C4B /* LOCItemViewController.m */,
+				5675992618BC274F00EF4C4B /* LOCItemViewController.xib */,
+				56B1223218BBFEE600B6C0D6 /* LOCNewItemFormViewController.h */,
+				56B1223318BBFEE600B6C0D6 /* LOCNewItemFormViewController.m */,
+				567B876B18BC08B00003DFA1 /* LOCNewItemFormViewController.xib */,
 				56B1220718BBFCB900B6C0D6 /* Supporting Files */,
 			);
 			path = Locator;
@@ -220,6 +262,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				567B876C18BC08B00003DFA1 /* LOCNewItemFormViewController.xib in Resources */,
+				5675992818BC274F00EF4C4B /* LOCItemViewController.xib in Resources */,
+				567B877918BC0C290003DFA1 /* LOCItemCell.xib in Resources */,
 				56B1220B18BBFCB900B6C0D6 /* InfoPlist.strings in Resources */,
 				56B1221318BBFCB900B6C0D6 /* Images.xcassets in Resources */,
 			);
@@ -240,8 +285,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56B1223718BBFFC800B6C0D6 /* LOCItem.m in Sources */,
 				56B1220D18BBFCB900B6C0D6 /* main.m in Sources */,
+				5675992718BC274F00EF4C4B /* LOCItemViewController.m in Sources */,
+				56B1223118BBFD2700B6C0D6 /* LOCItemTableViewController.m in Sources */,
 				56B1221118BBFCB900B6C0D6 /* LOCAppDelegate.m in Sources */,
+				56B1223418BBFEE600B6C0D6 /* LOCNewItemFormViewController.m in Sources */,
+				567B877518BC0B610003DFA1 /* LOCItemCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +492,7 @@
 				56B1222B18BBFCB900B6C0D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		56B1222C18BBFCB900B6C0D6 /* Build configuration list for PBXNativeTarget "LocatorTests" */ = {
 			isa = XCConfigurationList;
@@ -450,6 +501,7 @@
 				56B1222E18BBFCB900B6C0D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

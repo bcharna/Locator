@@ -7,6 +7,7 @@
 //
 
 #import "LOCAppDelegate.h"
+#import "LOCItemTableViewController.h"
 
 @implementation LOCAppDelegate
 
@@ -15,6 +16,9 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    LOCItemTableViewController *tableView = [[LOCItemTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:tableView];
+    self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
     return YES;
 }
