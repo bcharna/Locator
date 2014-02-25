@@ -11,8 +11,8 @@
 #import "LOCItemCell.h"
 #import "LOCItemViewController.h"
 
-@interface LOCItemTableViewController () <LOCItemProtocol>
-@property (nonatomic,strong) NSMutableArray* items;
+@interface LOCItemTableViewController ()
+@property (nonatomic,strong) NSArray* items;
 @end
 
 @implementation LOCItemTableViewController
@@ -26,31 +26,45 @@
     return self;
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  
+  [self loadTableData];
+}
+
+- (void) loadTableData
+{
+  NSManagedObjectContext *context = self.managedObjectContext;
+  NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+  NSEntityDescription *entity = [NSEntityDescription entityForName:@"LOCItem"
+                                            inManagedObjectContext:context];
+  [fetchRequest setEntity:entity];
+  NSError *error = nil;
+  self.items = [context executeFetchRequest:fetchRequest error:&error];
+  [self.tableView reloadData];
+}
+
+
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    UIBarButtonItem *newItemButton = [[UIBarButtonItem alloc] initWithTitle:@"New Item" style:UIBarButtonItemStylePlain target:self action:@selector(getNewItem:)];
-    self.navigationItem.rightBarButtonItem = newItemButton;
-    [self.tableView registerNib:[UINib nibWithNibName:@"LOCItemCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"ItemCell"];
+  [super viewDidLoad];
+  UIBarButtonItem *newItemButton = [[UIBarButtonItem alloc] initWithTitle:@"New Item" style:UIBarButtonItemStylePlain target:self action:@selector(getNewItem:)];
+  self.navigationItem.rightBarButtonItem = newItemButton;
+  [self.tableView registerNib:[UINib nibWithNibName:@"LOCItemCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"ItemCell"];
 }
 
 - (void) getNewItem:(id) sender
 {
   LOCNewItemFormViewController *form = [[LOCNewItemFormViewController alloc] init];
-  form.delegate = self;
+  form.managedObjectContext = self.managedObjectContext;
   [self.navigationController pushViewController:form animated:YES];
-}
-
-- (void) receivedNewItem:(LOCItem *)item
-{
-  [self.items addObject:item];
-  [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
@@ -69,11 +83,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"ItemCell";
-    LOCItemCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    LOCItem *item = [self.items objectAtIndex:indexPath.row];
-    cell.nameLabel.text = item.name;
-    return cell;
+  static NSString *CellIdentifier = @"ItemCell";
+  LOCItemCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+  LOCItem *item = [self.items objectAtIndex:indexPath.row];
+  cell.nameLabel.text = item.name;
+  return cell;
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -11,8 +11,10 @@
 #import "LOCItem.h"
 
 @interface LOCItemViewController : UIViewController
+
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) CLLocation *location;
 @property (strong, nonatomic) LOCItem *item;
+
 @end

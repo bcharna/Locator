@@ -42,9 +42,13 @@
 }
 
 - (void)submit:(id) sender
-{
-  LOCItem *item = [[LOCItem alloc] initWithName:self.nameField.text withLocation:self.mapView.userLocation.location];
-  [self.delegate receivedNewItem:item];
+{  
+  LOCItem *item = [NSEntityDescription insertNewObjectForEntityForName:@"LOCItem" inManagedObjectContext:self.managedObjectContext];
+  item.name = self.nameField.text;
+  item.location = self.mapView.userLocation.location;
+  
+  NSError *error = nil;
+  [self.managedObjectContext save:&error];
   [self.navigationController popViewControllerAnimated:YES];
 }
 

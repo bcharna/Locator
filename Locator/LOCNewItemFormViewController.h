@@ -10,15 +10,13 @@
 #import <MapKit/MapKit.h>
 #import "LOCItem.h"
 
-@protocol LOCItemProtocol <NSObject>
-- (void) receivedNewItem:(LOCItem*) item;
-@end
-
 @interface LOCNewItemFormViewController : UIViewController <MKMapViewDelegate, UITextFieldDelegate>
-@property (strong, nonatomic) id<LOCItemProtocol> delegate;
+
 //@property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *currentLocation;
 @property (nonatomic, strong) UIBarButtonItem *submitButton;
 @property (strong, nonatomic) IBOutlet UITextField *nameField;
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
+@property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
+
 @end

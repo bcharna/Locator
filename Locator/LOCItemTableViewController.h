@@ -9,4 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface LOCItemTableViewController : UITableViewController
+
+@property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
+
 @end

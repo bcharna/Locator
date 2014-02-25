@@ -1,5 +1,5 @@
 //
-//  LOCItem.h
+//  Item.h
 //  Locator
 //
 //  Created by Brad Charna on 2/24/14.
@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface LOCItem : NSObject
-@property (nonatomic,strong) NSString* name;
-@property (nonatomic,strong) CLLocation* location;
 
--(instancetype) initWithName: (NSString*) name withLocation:(CLLocation*) location;
+@interface LOCItem : NSManagedObject
+
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) CLLocation * location;
+
 @end
