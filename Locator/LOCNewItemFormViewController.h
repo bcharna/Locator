@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "LOCItem.h"
 
-@interface LOCNewItemFormViewController : UIViewController <MKMapViewDelegate, UITextFieldDelegate>
+@interface LOCNewItemFormViewController : UIViewController <MKMapViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
 
 //@property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *currentLocation;
@@ -18,5 +18,6 @@
 @property (strong, nonatomic) IBOutlet UITextField *nameField;
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
+@property (strong, nonatomic) IBOutlet UITableView *table;
 
 @end

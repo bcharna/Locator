@@ -9,44 +9,62 @@
 #import "LOCNewItemFormViewController.h"
 
 @interface LOCNewItemFormViewController ()
-
+@property (nonatomic,strong) UITextField *field;
 @end
 
 @implementation LOCNewItemFormViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-//      self.locationManager = [[CLLocationManager alloc] init];
-      // look at CoreLocation constants documentation for different accuracy definitions
-//      self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-      // possible since we conform to the CLLocationManagerDelegate protocol
-//      self.locationManager.delegate = self;
-//      [self.locationManager startUpdatingLocation];
-      self.title = @"New Item";
-    }
-    return self;
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+  if (self) {
+    //      self.locationManager = [[CLLocationManager alloc] init];
+    // look at CoreLocation constants documentation for different accuracy definitions
+    //      self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    // possible since we conform to the CLLocationManagerDelegate protocol
+    //      self.locationManager.delegate = self;
+    //      [self.locationManager startUpdatingLocation];
+    self.title = @"New Item";
+    CGRect myFrame = [self.view frame];
+    
+    self.field = [[UITextField alloc] initWithFrame:CGRectMake([self.table separatorInset].left, 0, myFrame.size.width - 25, 60)];
+    //      self.field = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, myFrame.size.width - 25, 60)];
+    self.field.placeholder = @"Name";
+    self.field.returnKeyType = UIReturnKeyDone;
+    self.field.delegate = self;
+    self.field.autocorrectionType = UITextAutocorrectionTypeNo;
+    self.field.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.field.clearButtonMode = UITextFieldViewModeWhileEditing;
+    NSLog(@"%d",self.field.isEnabled);
+    
+  }
+  return self;
 }
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-//    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
-    self.mapView.delegate = self;
-    self.mapView.showsUserLocation = YES;
-    self.nameField.delegate = self;
-
-    self.saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(submit:)];
-
-    [self.saveButton setEnabled:NO];
-    self.navigationItem.rightBarButtonItem = self.saveButton;
+  [super viewDidLoad];
+  //    [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+  self.mapView.delegate = self;
+  self.mapView.showsUserLocation = YES;
+  self.table.delegate = self;
+  self.table.dataSource = self;
+  self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
+  //  NSLog(@"inset=%f",);
+  
+  [self.table reloadData];
+  self.nameField.delegate = self;
+  
+  self.saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(submit:)];
+  
+  [self.saveButton setEnabled:NO];
+  self.navigationItem.rightBarButtonItem = self.saveButton;
 }
 
 - (void)submit:(id) sender
-{  
+{
   LOCItem *item = [NSEntityDescription insertNewObjectForEntityForName:@"LOCItem" inManagedObjectContext:self.managedObjectContext];
-  item.name = self.nameField.text;
+  item.name = self.field.text;
   item.location = self.mapView.userLocation.location;
   
   NSError *error = nil;
@@ -79,8 +97,45 @@
 
 - (void)didReceiveMemoryWarning
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
+}
+
+
+# pragma mark - TableView delegate
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+  return 1;
+}
+
+
+
+// Customize the number of rows in the table view.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+  return 1;
+}
+
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  return 60;
+}
+
+- (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  NSLog(@"hello");
+  static NSString *CellIdentifier = @"Cell";
+  
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+  }
+  //  cell.indentationWidth = 40;
+  NSLog(@"x = %f", [cell indentationWidth]); // GIVES 10, not 15 which looks right
+  
+  [cell.contentView addSubview:self.field];
+  return cell;
+  
 }
 
 @end
