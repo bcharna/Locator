@@ -51,6 +51,7 @@
   self.mapView.showsUserLocation = YES;
   self.table.delegate = self;
   self.table.dataSource = self;
+  self.table.scrollEnabled = NO;
   self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
   //  NSLog(@"inset=%f",);
   
