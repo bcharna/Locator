@@ -10,6 +10,7 @@
 
 @interface LOCNewItemFormViewController ()
 @property (nonatomic,strong) UITextField *field;
+@property BOOL locationRetrieved;
 @end
 
 @implementation LOCNewItemFormViewController
@@ -35,6 +36,7 @@
     self.field.autocorrectionType = UITextAutocorrectionTypeNo;
     self.field.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.field.clearButtonMode = UITextFieldViewModeWhileEditing;
+    [self.field addTarget:self action:@selector(nameFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     NSLog(@"%d",self.field.isEnabled);
     
   }
@@ -61,6 +63,24 @@
   self.navigationItem.rightBarButtonItem = self.saveButton;
 }
 
+- (BOOL)nameEntered
+{
+  NSString *trimmed = [self.field.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+  if ([trimmed isEqualToString:@""]) {
+    return NO;
+  }
+  return YES;
+}
+
+- (void)nameFieldDidChange:(UITextField *)textField
+{
+  if ([self nameEntered] && self.locationRetrieved) {
+    [self.saveButton setEnabled:YES];
+  } else {
+    [self.saveButton setEnabled:NO];
+  }
+}
+
 - (void)submit:(id) sender
 {
   LOCItem *item = [NSEntityDescription insertNewObjectForEntityForName:@"LOCItem" inManagedObjectContext:self.managedObjectContext];
@@ -84,16 +104,10 @@
   mapRegion.span.latitudeDelta = 0.005;
   mapRegion.span.longitudeDelta = 0.005;
   [mapView setRegion:mapRegion animated: YES];
-  [self.saveButton setEnabled:YES];
+  if ([self nameEntered])
+    [self.saveButton setEnabled:YES];
+  self.locationRetrieved = YES;
 }
-
-//- (void)locationManager:(CLLocationManager *)locationManager didUpdateLocations:(NSArray *)locations
-//{
-//  CLLocation *location = [locations objectAtIndex:0];
-//  self.currentLocation = location;
-//  [self.mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
-//  [self.submitButton setEnabled:YES];
-//}
 
 - (void)didReceiveMemoryWarning
 {
