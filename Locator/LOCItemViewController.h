@@ -10,7 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "LOCItem.h"
 
-@interface LOCItemViewController : UIViewController
+@interface LOCItemViewController : UIViewController <MKMapViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
