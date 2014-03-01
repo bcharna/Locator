@@ -13,5 +13,11 @@
 
 @dynamic name;
 @dynamic location;
+@dynamic creationDate;
 
+- (void)awakeFromInsert
+{
+    [super awakeFromInsert];
+    self.creationDate = [NSDate date];
+}
 @end

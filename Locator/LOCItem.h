@@ -15,5 +15,6 @@
 
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) CLLocation * location;
+@property (nonatomic, retain) NSDate * creationDate;
 
 @end

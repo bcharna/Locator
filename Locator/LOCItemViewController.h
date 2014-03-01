@@ -16,5 +16,6 @@
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) CLLocation *location;
 @property (strong, nonatomic) LOCItem *item;
+@property (strong, nonatomic) IBOutlet UILabel *creationDateLabel;
 
 @end
