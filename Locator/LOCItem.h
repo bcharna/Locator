@@ -17,4 +17,5 @@
 @property (nonatomic, retain) CLLocation * location;
 @property (nonatomic, retain) NSDate * creationDate;
 
+- (NSString*) creationDateStringShort;
 @end

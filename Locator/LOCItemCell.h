@@ -10,5 +10,6 @@
 
 @interface LOCItemCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *creationDateLabel;
 
 @end

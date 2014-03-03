@@ -43,6 +43,10 @@
 {
     NSManagedObjectContext *context = self.managedObjectContext;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+
+    [fetchRequest setSortDescriptors:sortDescriptors];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"LOCItem"
                                               inManagedObjectContext:context];
     [fetchRequest setEntity:entity];
@@ -85,6 +89,7 @@
     LOCItemCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     LOCItem *item = [self.items objectAtIndex:indexPath.row];
     cell.nameLabel.text = item.name;
+    cell.creationDateLabel.text = [item creationDateStringShort];
     return cell;
 }
 
