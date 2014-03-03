@@ -26,7 +26,7 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"E, MMM d, yyyy"];
     NSString *date = [formatter stringFromDate:self.creationDate];
-    [formatter setDateFormat:@"h:m a"];
+    [formatter setDateFormat:@"h:mm a"];
     NSString *time = [formatter stringFromDate:self.creationDate];
     NSString *label = [NSString stringWithFormat:@"Added %@ at %@", date, time];
     return label;
@@ -55,7 +55,7 @@
     NSString *date;
     if (createdToday) {
         // 3:30 PM
-        [formatter setDateFormat:@"h:m a"];
+        [formatter setDateFormat:@"h:mm a"];
         date = [formatter stringFromDate:self.creationDate];
         return date;
     } else if (createdWithinOneDay) {
