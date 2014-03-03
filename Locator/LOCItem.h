@@ -18,4 +18,5 @@
 @property (nonatomic, retain) NSDate * creationDate;
 
 - (NSString*) creationDateStringShort;
+- (NSString*) creationDateStringFull;
 @end

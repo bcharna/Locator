@@ -32,7 +32,7 @@
     mapRegion.span.longitudeDelta = 0.005;
     [self.mapView setRegion:mapRegion animated: YES];
     self.nameLabel.text = self.item.name;
-    self.creationDateLabel.text = [self creationDateString];
+    self.creationDateLabel.text = [self.item creationDateStringFull];
     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
     annotation.subtitle = @"Open in Maps";
     [annotation setCoordinate:self.item.location.coordinate];
@@ -47,16 +47,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (NSString *)creationDateString
-{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"E, MMM d, yyyy"];
-    NSString *date = [formatter stringFromDate:self.item.creationDate];
-    [formatter setDateFormat:@"h:m a"];
-    NSString *time = [formatter stringFromDate:self.item.creationDate];
-    NSString *label = [NSString stringWithFormat:@"Added %@ at %@", date, time];
-    return label;
-}
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
 {

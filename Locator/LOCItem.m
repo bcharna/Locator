@@ -21,6 +21,17 @@
     self.creationDate = [NSDate date];
 }
 
+- (NSString *)creationDateStringFull
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"E, MMM d, yyyy"];
+    NSString *date = [formatter stringFromDate:self.creationDate];
+    [formatter setDateFormat:@"h:m a"];
+    NSString *time = [formatter stringFromDate:self.creationDate];
+    NSString *label = [NSString stringWithFormat:@"Added %@ at %@", date, time];
+    return label;
+}
+
 - (NSString*) creationDateStringShort
 {
     NSDate *midnight = [NSDate date];
@@ -41,23 +52,23 @@
     result = [sevenDaysAgo compare:self.creationDate];
     BOOL createdWithinSevenDays = result == NSOrderedAscending;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-
+    NSString *date;
     if (createdToday) {
         // 3:30 PM
         [formatter setDateFormat:@"h:m a"];
-        NSString *date = [formatter stringFromDate:self.creationDate];
+        date = [formatter stringFromDate:self.creationDate];
         return date;
     } else if (createdWithinOneDay) {
         return @"Yesterday";
     } else if (createdWithinSevenDays) {
         // Wednesday
         [formatter setDateFormat:@"EEEE"];
-        NSString *date = [formatter stringFromDate:self.creationDate];
+        date = [formatter stringFromDate:self.creationDate];
         return date;
     } else {
         // 3/2/14
         [formatter setDateFormat:@"M/d/yy"];
-        NSString *date = [formatter stringFromDate:self.creationDate];
+        date = [formatter stringFromDate:self.creationDate];
         return date;
     }
 }
