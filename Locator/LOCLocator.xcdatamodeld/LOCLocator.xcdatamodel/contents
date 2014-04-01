@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13C64" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13C64" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="LOCCategory" representedClassName="LOCCategory" syncable="YES">
+        <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="item" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LOCItem" inverseName="category" inverseEntity="LOCItem" syncable="YES"/>
+    </entity>
     <entity name="LOCItem" representedClassName="LOCItem" syncable="YES">
         <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="location" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LOCCategory" inverseName="item" inverseEntity="LOCCategory" syncable="YES"/>
     </entity>
     <elements>
-        <element name="LOCItem" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="LOCCategory" positionX="97" positionY="107" width="128" height="90"/>
+        <element name="LOCItem" positionX="-126" positionY="-243" width="128" height="103"/>
     </elements>
 </model>

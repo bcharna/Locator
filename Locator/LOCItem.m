@@ -14,6 +14,7 @@
 @dynamic name;
 @dynamic location;
 @dynamic creationDate;
+@dynamic category;
 
 - (void)awakeFromInsert
 {

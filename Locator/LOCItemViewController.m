@@ -38,7 +38,11 @@
     [annotation setCoordinate:self.item.location.coordinate];
     [annotation setTitle:self.item.name];
     [self.mapView addAnnotation:annotation];
+    self.categoryLabel.text = self.item.category.name;
+    [self.categoryLabel sizeToFit];
+    [self.categoryLabel setNeedsDisplay];
     self.mapView.delegate = self;
+
 }
 
 - (void)didReceiveMemoryWarning

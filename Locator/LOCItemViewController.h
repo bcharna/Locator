@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "LOCItem.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface LOCItemViewController : UIViewController <MKMapViewDelegate>
 
@@ -17,5 +18,6 @@
 @property (strong, nonatomic) CLLocation *location;
 @property (strong, nonatomic) LOCItem *item;
 @property (strong, nonatomic) IBOutlet UILabel *creationDateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *categoryLabel;
 
 @end

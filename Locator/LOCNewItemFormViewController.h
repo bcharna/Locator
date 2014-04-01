@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "LOCItem.h"
+#import "LOCCategoryTableViewChooserController.h"
 
-@interface LOCNewItemFormViewController : UIViewController <MKMapViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface LOCNewItemFormViewController : UIViewController <MKMapViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, LOCCategoryTableViewChooserControllerDelegate>
 
 //@property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *currentLocation;

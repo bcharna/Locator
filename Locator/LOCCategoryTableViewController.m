@@ -1,34 +1,47 @@
 //
-//  LOCItemTableViewController.m
+//  LOCCategoryTableViewController.m
 //  Locator
 //
-//  Created by Brad Charna on 2/24/14.
+//  Created by Brad Charna on 3/25/14.
 //  Copyright (c) 2014 Brad Charna. All rights reserved.
 //
 
-#import "LOCItemTableViewController.h"
-#import "LOCNewItemFormViewController.h"
-#import "LOCItemCell.h"
-#import "LOCItemViewController.h"
 #import "LOCCategoryTableViewController.h"
+#import "LOCCategoryCell.h"
+#import "LOCCategory.h"
 
-@interface LOCItemTableViewController ()
+@interface LOCCategoryTableViewController ()
+
 @end
 
-@implementation LOCItemTableViewController
+@implementation LOCCategoryTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        self.title = @"Locator";
+        // Custom initialization
     }
     return self;
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void)viewDidLoad
 {
-    [super viewWillAppear:animated];
+    [super viewDidLoad];
+    NSError *error = nil;
+    [[self fetchedResultsController] performFetch:&error];
+    [self setupNavbar];
+    [self.tableView registerNib:[UINib nibWithNibName:@"LOCCategoryCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"CategoryCell"];
+}
+
+- (void) setupNavbar
+{
+    UIBarButtonItem *newItemButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(getNewCategory:)];
+    self.navigationItem.rightBarButtonItem = newItemButton;
+    UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(donePressed:)];
+    self.navigationItem.leftBarButtonItem = doneButton;
+    self.title = @"Categories";
+
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
@@ -36,10 +49,10 @@
         return _fetchedResultsController;
     }
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"LOCCategory" inManagedObjectContext:self.managedObjectContext];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     [fetchRequest setSortDescriptors:sortDescriptors];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"LOCItem" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     [fetchRequest setFetchBatchSize:15];
     NSFetchedResultsController *newFetchedResultsController =
@@ -49,34 +62,31 @@
     return _fetchedResultsController;
 }
 
-- (void)viewDidLoad
+- (void) getNewCategory:(id) sender
 {
-    [super viewDidLoad];
-    NSError *error = nil;
-    [[self fetchedResultsController] performFetch:&error];
-    UIBarButtonItem *newItemButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(getNewItem:)];
-    self.navigationItem.rightBarButtonItem = newItemButton;
-    UIBarButtonItem *categoriesButton = [[UIBarButtonItem alloc] initWithTitle:@"Categories" style:UIBarButtonItemStylePlain target:self action:@selector(categoriesPressed:)];
-    self.navigationItem.leftBarButtonItem = categoriesButton;
-    [self.tableView registerNib:[UINib nibWithNibName:@"LOCItemCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"ItemCell"];
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Add Category..." message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    UITextField *textField = [alert textFieldAtIndex:0];
+    textField.delegate = self;
+    [alert show];
 }
 
-- (void) categoriesPressed:(id) sender
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"pressed");
-    LOCCategoryTableViewController *catVC = [[LOCCategoryTableViewController alloc] initWithStyle:UITableViewStylePlain];
-    catVC.managedObjectContext = self.managedObjectContext;
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:catVC];
-    [self presentViewController:nav animated:YES completion:^{
-        ;
-    }];
+    if(buttonIndex == 1)//OK button
+    {
+        NSString *input = [[alertView textFieldAtIndex:0] text];
+        NSLog(@"%@", input);
+        LOCCategory *item = [NSEntityDescription insertNewObjectForEntityForName:@"LOCCategory" inManagedObjectContext:self.managedObjectContext];
+        item.name = input;
+        NSError *error = nil;
+        [self.managedObjectContext save:&error];
+    }
 }
 
-- (void) getNewItem:(id) sender
+- (void) donePressed:(id) sender
 {
-    LOCNewItemFormViewController *form = [[LOCNewItemFormViewController alloc] init];
-    form.managedObjectContext = self.managedObjectContext;
-    [self.navigationController pushViewController:form animated:YES];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -94,27 +104,27 @@
 }
 
 
-- (void)configureCell:(LOCItemCell *)cell atIndexPath:(NSIndexPath *)indexPath
+- (void)configureCell:(LOCCategoryCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    LOCItem *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    LOCCategory *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.nameLabel.text = item.name;
-    cell.creationDateLabel.text = [item creationDateStringShort];
+//    cell.creationDateLabel.text = [item creationDateStringShort];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"ItemCell";
-    LOCItemCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"CategoryCell";
+    LOCCategoryCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    LOCItem *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    LOCItemViewController *viewController = [[LOCItemViewController alloc] init];
-    viewController.item = item;
-    [self.navigationController pushViewController:viewController animated:YES];
+//    LOCCategory *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
+//    LOCItemViewController *viewController = [[LOCItemViewController alloc] init];
+//    viewController.item = item;
+//    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 // Override to support conditional editing of the table view.
@@ -126,10 +136,10 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    LOCItem *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [self.managedObjectContext deleteObject:item];
-    NSError *error = nil;
-    [self.managedObjectContext save:&error];
+//    LOCItem *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
+//    [self.managedObjectContext deleteObject:item];
+//    NSError *error = nil;
+//    [self.managedObjectContext save:&error];
 }
 
 
@@ -150,7 +160,7 @@
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [self configureCell:(LOCItemCell*)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            [self configureCell:(LOCCategoryCell*)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
             
         case NSFetchedResultsChangeMove:
@@ -178,4 +188,5 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView endUpdates];
 }
+
 @end

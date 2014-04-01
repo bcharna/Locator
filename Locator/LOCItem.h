@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import <CoreLocation/CoreLocation.h>
+#import "LOCCategory.h"
 
 
 @interface LOCItem : NSManagedObject
@@ -16,6 +17,7 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) CLLocation * location;
 @property (nonatomic, retain) NSDate * creationDate;
+@property (nonatomic, retain) LOCCategory * category;
 
 - (NSString*) creationDateStringShort;
 - (NSString*) creationDateStringFull;

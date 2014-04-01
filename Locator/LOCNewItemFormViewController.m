@@ -7,9 +7,12 @@
 //
 
 #import "LOCNewItemFormViewController.h"
+#import "LOCCategoryTableViewChooserController.h"
+#import "LOCChooseCategoryCell.h"
 
 @interface LOCNewItemFormViewController ()
 @property (nonatomic,strong) UITextField *field;
+@property (nonatomic,strong) LOCCategory *selectedCategory;
 @property BOOL locationRetrieved;
 @end
 
@@ -38,10 +41,10 @@
     [super viewDidLoad];
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
+    [self.table registerNib:[UINib nibWithNibName:@"LOCChooseCategoryCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"ChooseCategoryCell"];
     self.table.delegate = self;
     self.table.dataSource = self;
     self.table.scrollEnabled = NO;
-    self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.table reloadData];
     self.nameField.delegate = self;
     self.saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(submit:)];
@@ -65,10 +68,23 @@
         [self.saveButton setEnabled:NO];
 }
 
+- (void)didSelectCategory:(LOCCategory *) category
+{
+    LOCChooseCategoryCell *cell = (LOCChooseCategoryCell*)[self.table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+//    NSLog(@"%@" ,cell.categoryLabel);
+//    NSLog(@"chee");
+    cell.categoryLabel.text = category.name;
+    [self.table reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:NO];
+    self.selectedCategory = category;
+    NSLog(@"%@", category);
+}
+
 - (void)submit:(id) sender
 {
     LOCItem *item = [NSEntityDescription insertNewObjectForEntityForName:@"LOCItem" inManagedObjectContext:self.managedObjectContext];
     item.name = self.field.text;
+    item.category = self.selectedCategory;
+    NSLog(@"category = %@", item.category);
     item.location = self.mapView.userLocation.location;
     NSError *error = nil;
     [self.managedObjectContext save:&error];
@@ -106,7 +122,7 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return 2;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -116,12 +132,42 @@
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil)
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    [cell.contentView addSubview:self.field];
+    UITableViewCell *cell;
+    static NSString *CellIdentifier;
+    if (indexPath.row == 0) {
+        CellIdentifier = @"Cell";
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil)
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+
+        [cell.contentView addSubview:self.field];
+    }
+    else {
+        CellIdentifier = @"ChooseCategoryCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil)
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        
+//        [cell.contentView addSubview:self.field];
+    }
     return cell;
 }
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 1) {
+        LOCCategoryTableViewChooserController *catVC = [[LOCCategoryTableViewChooserController alloc] initWithStyle:UITableViewStylePlain];
+        catVC.managedObjectContext = self.managedObjectContext;
+        catVC.delegate = self;
+        if (self.selectedCategory != nil)
+            catVC.selectedCategory = self.selectedCategory;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:catVC];
+        [self presentViewController:nav animated:YES completion:nil];
+ 
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+}
+
 
 @end
