@@ -11,7 +11,7 @@
 #import "LOCCategory.h"
 
 @interface LOCCategoryTableViewController ()
-
+@property (nonatomic, strong) NSIndexPath *bottomIndexPath;
 @end
 
 @implementation LOCCategoryTableViewController
@@ -50,7 +50,7 @@
     }
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"LOCCategory" inManagedObjectContext:self.managedObjectContext];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"creationDate" ascending:YES];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     [fetchRequest setSortDescriptors:sortDescriptors];
     [fetchRequest setEntity:entity];
@@ -71,16 +71,19 @@
     [alert show];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex == 1)//OK button
     {
         NSString *input = [[alertView textFieldAtIndex:0] text];
-        NSLog(@"%@", input);
         LOCCategory *item = [NSEntityDescription insertNewObjectForEntityForName:@"LOCCategory" inManagedObjectContext:self.managedObjectContext];
         item.name = input;
         NSError *error = nil;
         [self.managedObjectContext save:&error];
+    }
+    if (self.bottomIndexPath) {
+        [self.tableView scrollToRowAtIndexPath:self.bottomIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        self.bottomIndexPath = nil;
     }
 }
 
@@ -153,6 +156,7 @@
             
         case NSFetchedResultsChangeInsert:
             [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            self.bottomIndexPath = newIndexPath;
             break;
             
         case NSFetchedResultsChangeDelete:
