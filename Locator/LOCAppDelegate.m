@@ -108,7 +108,18 @@
     
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"locator.sqlite"];
     
+    if( ![[NSFileManager defaultManager]
+          fileExistsAtPath:[storeURL path]] ) {
+        // must copy default data (None category)
+        NSString *sqlitePath = [[NSBundle mainBundle]
+                                pathForResource:@"locator" ofType:@"sqlite"
+                                inDirectory:nil];
+        NSError *error = nil;
+        [[NSFileManager defaultManager]
+            copyItemAtPath:sqlitePath toPath:[storeURL path] error:&error];
+    }
     NSError *error = nil;
+
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
         /*

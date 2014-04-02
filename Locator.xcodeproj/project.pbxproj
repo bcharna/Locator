@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		561F85BF18E2A10900DFA4AD /* LOCCategoryTableViewChooserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D588A218E276500082170C /* LOCCategoryTableViewChooserController.m */; };
+		561F85C918EBBB0C00DFA4AD /* locator.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 561F85C818EBBB0C00DFA4AD /* locator.sqlite */; };
 		566383D318BC02F600E81E2C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 566383D218BC02F600E81E2C /* CoreLocation.framework */; };
 		566919AF18E20243005C4954 /* LOCCategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 566919AE18E20243005C4954 /* LOCCategoryTableViewController.m */; };
 		566919B818E25FF9005C4954 /* LOCCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 566919B718E25FF9005C4954 /* LOCCategory.m */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		561F85C818EBBB0C00DFA4AD /* locator.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = locator.sqlite; sourceTree = "<group>"; };
 		566383D218BC02F600E81E2C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		566919AD18E20243005C4954 /* LOCCategoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOCCategoryTableViewController.h; sourceTree = "<group>"; };
 		566919AE18E20243005C4954 /* LOCCategoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOCCategoryTableViewController.m; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 		56B1220718BBFCB900B6C0D6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				561F85C818EBBB0C00DFA4AD /* locator.sqlite */,
 				56B1220818BBFCB900B6C0D6 /* Locator-Info.plist */,
 				56B1220918BBFCB900B6C0D6 /* InfoPlist.strings */,
 				56B1220C18BBFCB900B6C0D6 /* main.m */,
@@ -307,6 +310,7 @@
 				567B877918BC0C290003DFA1 /* LOCItemCell.xib in Resources */,
 				56B1220B18BBFCB900B6C0D6 /* InfoPlist.strings in Resources */,
 				56B1221318BBFCB900B6C0D6 /* Images.xcassets in Resources */,
+				561F85C918EBBB0C00DFA4AD /* locator.sqlite in Resources */,
 				56D588A818E27C980082170C /* LOCChooseCategoryCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
