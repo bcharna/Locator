@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LOCCategory.h"
 
 @interface LOCCategoryTableViewController : UITableViewController <NSFetchedResultsControllerDelegate, UITextFieldDelegate>
 
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
+- (void) getNewCategory:(id) sender;
+- (LOCCategory*) handleAlertViewDidDismissWithAlertView:(UIAlertView *)alertView buttonIndex: (NSInteger)buttonIndex;
 @end

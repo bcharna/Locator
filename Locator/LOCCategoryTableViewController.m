@@ -73,11 +73,17 @@
 
 - (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
+    [self handleAlertViewDidDismissWithAlertView:alertView buttonIndex: buttonIndex];
+}
+
+- (LOCCategory*) handleAlertViewDidDismissWithAlertView:(UIAlertView *)alertView buttonIndex: (NSInteger)buttonIndex
+{
+    LOCCategory *cat;
     if(buttonIndex == 1)//OK button
     {
         NSString *input = [[alertView textFieldAtIndex:0] text];
-        LOCCategory *item = [NSEntityDescription insertNewObjectForEntityForName:@"LOCCategory" inManagedObjectContext:self.managedObjectContext];
-        item.name = input;
+        cat = [NSEntityDescription insertNewObjectForEntityForName:@"LOCCategory" inManagedObjectContext:self.managedObjectContext];
+        cat.name = input;
         NSError *error = nil;
         [self.managedObjectContext save:&error];
     }
@@ -85,6 +91,7 @@
         [self.tableView scrollToRowAtIndexPath:self.bottomIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         self.bottomIndexPath = nil;
     }
+    return cat;
 }
 
 - (void) donePressed:(id) sender

@@ -8,8 +8,10 @@
 
 #import "LOCCategoryTableViewChooserController.h"
 #import "LOCCategoryCell.h"
+#import "LOCChooseCategoryCell.h"
 
 @interface LOCCategoryTableViewChooserController ()
+@property (nonatomic, strong) LOCCategoryCell *checkedCell;
 @end
 
 @implementation LOCCategoryTableViewChooserController
@@ -31,12 +33,18 @@
 
 - (void) setupNavbar
 {
-//    UIBarButtonItem *newItemButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self.delegate action:@selector(getNewCategory:)];
-//    self.navigationItem.rightBarButtonItem = newItemButton;
+    UIBarButtonItem *newItemButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(getNewCategory:)];
+    self.navigationItem.rightBarButtonItem = newItemButton;
     UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(donePressed:)];
     self.navigationItem.leftBarButtonItem = doneButton;
     self.title = @"Category";
-    
+}
+
+- (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    LOCCategory *cat =  [self handleAlertViewDidDismissWithAlertView:alertView buttonIndex: buttonIndex];
+    self.selectedCategory = cat;
+    self.checkedCell.accessoryType = UITableViewCellAccessoryNone;
 }
 
 - (void)configureCell:(LOCCategoryCell *)cell atIndexPath:(NSIndexPath *)indexPath
@@ -45,15 +53,10 @@
     cell.nameLabel.text = item.name;
     if ([self.selectedCategory isEqual:item]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        NSLog(@"Hello");
+        self.checkedCell = cell;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    NSLog(@"Wordl");
-    NSLog(@"*******");
-    NSLog(@"%@", self.selectedCategory);
-    NSLog(@"%@", item);
-    NSLog(@"*******");
 }
 
 - (void)didReceiveMemoryWarning
