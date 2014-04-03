@@ -63,7 +63,6 @@
 
 - (void) categoriesPressed:(id) sender
 {
-//    NSLog(@"pressed");
     LOCCategoryTableViewController *catVC = [[LOCCategoryTableViewController alloc] initWithStyle:UITableViewStylePlain];
     catVC.managedObjectContext = self.managedObjectContext;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:catVC];

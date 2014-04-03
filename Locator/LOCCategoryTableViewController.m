@@ -138,7 +138,6 @@
     }
     LOCCategory *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.nameLabel.text = item.name;
-//    cell.creationDateLabel.text = [item creationDateStringShort];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -178,14 +177,6 @@
     LOCCategory *cat = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [cat deleteCategory];
 }
-
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    LOCItem *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//    [self.managedObjectContext deleteObject:item];
-//    NSError *error = nil;
-//    [self.managedObjectContext save:&error];
-//}
 
 #pragma mark - NSFetchedResultsController protocol methods
 

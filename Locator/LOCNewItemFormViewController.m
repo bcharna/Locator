@@ -81,8 +81,6 @@
 - (void)didSelectCategory:(LOCCategory *) category
 {
     LOCChooseCategoryCell *cell = (LOCChooseCategoryCell*)[self.table cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
-//    NSLog(@"%@" ,cell.categoryLabel);
-//    NSLog(@"chee");
     cell.categoryLabel.text = category.name;
     [self.table reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:NO];
     self.selectedCategory = category;
@@ -155,9 +153,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil)
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        
-//        [cell.contentView addSubview:self.field];
-    }
+        }
     return cell;
 }
 
@@ -174,7 +170,6 @@
  
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
 }
 
 
