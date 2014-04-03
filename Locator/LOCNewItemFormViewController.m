@@ -36,6 +36,16 @@
     return self;
 }
 
+- (id) initWithManagedObjectContext: (id) context
+{
+    self = [super init];
+    if(self){
+        self.managedObjectContext = context;
+        self.selectedCategory = [LOCCategory defaultCategoryUsingContext: self.managedObjectContext];
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -76,7 +86,6 @@
     cell.categoryLabel.text = category.name;
     [self.table reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:NO];
     self.selectedCategory = category;
-    NSLog(@"%@", category);
 }
 
 - (void)submit:(id) sender
@@ -84,7 +93,6 @@
     LOCItem *item = [NSEntityDescription insertNewObjectForEntityForName:@"LOCItem" inManagedObjectContext:self.managedObjectContext];
     item.name = self.field.text;
     item.category = self.selectedCategory;
-    NSLog(@"category = %@", item.category);
     item.location = self.mapView.userLocation.location;
     NSError *error = nil;
     [self.managedObjectContext save:&error];

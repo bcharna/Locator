@@ -22,4 +22,15 @@
     self.creationDate = [NSDate date];
 }
 
++ (instancetype) defaultCategoryUsingContext:(NSManagedObjectContext*) context
+{
+  NSEntityDescription *entityDescription = [NSEntityDescription
+                                            entityForName:@"LOCCategory" inManagedObjectContext:context];
+  NSFetchRequest *request = [[NSFetchRequest alloc] init];
+  [request setEntity:entityDescription];
+  NSError *error;
+  NSArray *array = [context executeFetchRequest:request error:&error];
+  return [array objectAtIndex:0];
+}
+
 @end

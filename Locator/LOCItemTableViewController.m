@@ -74,8 +74,7 @@
 
 - (void) getNewItem:(id) sender
 {
-    LOCNewItemFormViewController *form = [[LOCNewItemFormViewController alloc] init];
-    form.managedObjectContext = self.managedObjectContext;
+    LOCNewItemFormViewController *form = [[LOCNewItemFormViewController alloc] initWithManagedObjectContext:self.managedObjectContext];
     [self.navigationController pushViewController:form animated:YES];
 }
 

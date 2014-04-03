@@ -21,4 +21,5 @@
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 @property (strong, nonatomic) IBOutlet UITableView *table;
 
+- (id) initWithManagedObjectContext: (id) context;
 @end

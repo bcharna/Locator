@@ -14,5 +14,5 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *item;
 @property (nonatomic, retain) NSDate * creationDate;
-
++ (instancetype) defaultCategoryUsingContext:(NSManagedObjectContext*) context;
 @end
