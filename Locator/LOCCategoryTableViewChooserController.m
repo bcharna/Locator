@@ -42,7 +42,7 @@
 
 - (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    LOCCategory *cat =  [self handleAlertViewDidDismissWithAlertView:alertView buttonIndex: buttonIndex];
+    LOCCategory *cat =  [self handleAddCategoryWithAlertView:alertView buttonIndex: buttonIndex];
     self.selectedCategory = cat;
     self.checkedCell.accessoryType = UITableViewCellAccessoryNone;
 }
@@ -75,6 +75,11 @@
 {
     self.selectedCategory = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [tableView reloadSections: [NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:NO];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return NO; // can never delete categories in chooser.
 }
 
 /*

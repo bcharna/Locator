@@ -15,5 +15,5 @@
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 
 - (void) getNewCategory:(id) sender;
-- (LOCCategory*) handleAlertViewDidDismissWithAlertView:(UIAlertView *)alertView buttonIndex: (NSInteger)buttonIndex;
+- (LOCCategory*) handleAddCategoryWithAlertView:(UIAlertView *)alertView buttonIndex: (NSInteger)buttonIndex;
 @end

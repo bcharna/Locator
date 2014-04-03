@@ -12,6 +12,8 @@
 
 @interface LOCCategoryTableViewController ()
 @property (nonatomic, strong) NSIndexPath *bottomIndexPath;
+@property (nonatomic, strong) LOCCategory *editingCategory;
+@property (nonatomic, strong) UIAlertView *editAlert;
 @end
 
 @implementation LOCCategoryTableViewController
@@ -20,7 +22,7 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+        self.editAlert = [[UIAlertView alloc] initWithTitle:@"Edit Category..." message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
     }
     return self;
 }
@@ -73,10 +75,25 @@
 
 - (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    [self handleAlertViewDidDismissWithAlertView:alertView buttonIndex: buttonIndex];
+    if (self.editAlert == alertView) {
+        [self handleEditCategoryWithAlertView:alertView buttonIndex: buttonIndex];
+    } else { // add category
+        [self handleAddCategoryWithAlertView:alertView buttonIndex: buttonIndex];
+    }
 }
 
-- (LOCCategory*) handleAlertViewDidDismissWithAlertView:(UIAlertView *)alertView buttonIndex: (NSInteger)buttonIndex
+- (LOCCategory*) handleEditCategoryWithAlertView:(UIAlertView *)alertView buttonIndex: (NSInteger)buttonIndex
+{
+    NSString *input = [[alertView textFieldAtIndex:0] text];
+    LOCCategory* cat = self.editingCategory;
+    cat.name = input;
+    NSError *error;
+    [self.managedObjectContext save:&error];
+    return cat;
+}
+
+- (LOCCategory*) handleAddCategoryWithAlertView:(UIAlertView *)alertView buttonIndex: (NSInteger)buttonIndex
+
 {
     LOCCategory *cat;
     if(buttonIndex == 1)//OK button
@@ -116,6 +133,9 @@
 
 - (void)configureCell:(LOCCategoryCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == 0) {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     LOCCategory *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.nameLabel.text = item.name;
 //    cell.creationDateLabel.text = [item creationDateStringShort];
@@ -131,27 +151,45 @@
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    LOCCategory *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
-//    LOCItemViewController *viewController = [[LOCItemViewController alloc] init];
-//    viewController.item = item;
-//    [self.navigationController pushViewController:viewController animated:YES];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 0) { // cannot edit None
+        return;
+    }
+    self.editingCategory = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    self.editAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    UITextField *textField = [self.editAlert textFieldAtIndex:0];
+    textField.delegate = self;
+    textField.text = self.editingCategory.name;
+    [self.editAlert show];
 }
 
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == 0) { // cannot delete None
+        return NO;
+    }
     return YES;
 }
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    LOCCategory *cat = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [self.managedObjectContext deleteObject:cat];
+    NSError *error = nil;
+    [self.managedObjectContext save:&error];
+}
+
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
 //    LOCItem *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
 //    [self.managedObjectContext deleteObject:item];
 //    NSError *error = nil;
 //    [self.managedObjectContext save:&error];
-}
+//}
 
+#pragma mark - NSFetchedResultsController protocol methods
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
