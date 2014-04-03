@@ -33,4 +33,15 @@
   return [array objectAtIndex:0];
 }
 
+- (void) deleteCategory
+{
+    LOCCategory *defaultCategory = [LOCCategory defaultCategoryUsingContext:self.managedObjectContext];
+    [self.item enumerateObjectsUsingBlock:^(LOCItem *item, BOOL *stop) {
+        item.category = defaultCategory;
+    }];
+    NSError *error;
+    [self.managedObjectContext deleteObject:self];
+    [self.managedObjectContext save:&error];
+}
+
 @end

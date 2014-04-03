@@ -176,9 +176,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LOCCategory *cat = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    [self.managedObjectContext deleteObject:cat];
-    NSError *error = nil;
-    [self.managedObjectContext save:&error];
+    [cat deleteCategory];
 }
 
 //- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath

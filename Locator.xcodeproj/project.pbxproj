@@ -287,8 +287,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 56B1222918BBFCB900B6C0D6 /* Build configuration list for PBXNativeTarget "Locator" */;
 			buildPhases = (
-				56B121F918BBFCB900B6C0D6 /* Sources */,
 				56B121FA18BBFCB900B6C0D6 /* Frameworks */,
+				56B121F918BBFCB900B6C0D6 /* Sources */,
 				56B121FB18BBFCB900B6C0D6 /* Resources */,
 			);
 			buildRules = (

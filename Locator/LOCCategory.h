@@ -15,4 +15,5 @@
 @property (nonatomic, retain) NSSet *item;
 @property (nonatomic, retain) NSDate * creationDate;
 + (instancetype) defaultCategoryUsingContext:(NSManagedObjectContext*) context;
+- (void) deleteCategory;
 @end
