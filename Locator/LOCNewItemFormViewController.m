@@ -14,6 +14,7 @@
 @property (nonatomic,strong) UITextField *field;
 @property (nonatomic,strong) LOCCategory *selectedCategory;
 @property BOOL locationRetrieved;
+@property (nonatomic, strong) LOCCategoryChooserTableViewController *categoryChooserTVC;
 @end
 
 @implementation LOCNewItemFormViewController
@@ -160,16 +161,22 @@
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 1) {
-        LOCCategoryChooserTableViewController *catVC = [[LOCCategoryChooserTableViewController alloc] initWithStyle:UITableViewStylePlain];
-        catVC.managedObjectContext = self.managedObjectContext;
-        catVC.delegate = self;
-        if (self.selectedCategory != nil)
-            catVC.selectedCategory = self.selectedCategory;
+        LOCCategoryChooserTableViewController *catVC = [self categoryChooserTVC];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:catVC];
         [self presentViewController:nav animated:YES completion:nil];
  
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+-(LOCCategoryChooserTableViewController*) categoryChooserTVC
+{
+    if (_categoryChooserTVC)
+        return _categoryChooserTVC;
+    _categoryChooserTVC = [[LOCCategoryChooserTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    _categoryChooserTVC.managedObjectContext = self.managedObjectContext;
+    _categoryChooserTVC.delegate = self;
+    return _categoryChooserTVC;
 }
 
 
