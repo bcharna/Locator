@@ -11,7 +11,6 @@
 #import "LOCCategory.h"
 
 @interface LOCCategoryTableViewController ()
-@property (nonatomic, strong) NSIndexPath *bottomIndexPath;
 @property (nonatomic, strong) LOCCategory *editingCategory;
 @property (nonatomic, strong) UIAlertView *editAlert;
 @end

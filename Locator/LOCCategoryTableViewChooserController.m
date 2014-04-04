@@ -40,11 +40,13 @@
     self.title = @"Category";
 }
 
-- (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    // add category
+    LOCCategory *cat = [self handleAddCategoryWithAlertView:alertView buttonIndex: buttonIndex];
     self.checkedCell.accessoryType = UITableViewCellAccessoryNone;
-    NSIndexPath *indexPath = [self scrollToBottom];
-    self.selectedCategory = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    self.selectedCategory = cat;
+    [self.tableView reloadRowsAtIndexPaths:@[self.bottomIndexPath] withRowAnimation:NO];
 }
 
 - (void)configureCell:(LOCCategoryCell *)cell atIndexPath:(NSIndexPath *)indexPath
