@@ -73,7 +73,24 @@
     [alert show];
 }
 
+// After dismiss, scroll to bottom (doing this in alertView:clickedButtonAtIndex: causes glitches.)
 - (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    [self scrollToBottom];
+}
+
+// Return the IndexPath of the bottom cell
+- (NSIndexPath*) scrollToBottom
+{
+    NSIndexPath *indexPath = self.bottomIndexPath;
+    if (indexPath) {
+        [self.tableView scrollToRowAtIndexPath:self.bottomIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        self.bottomIndexPath = nil;
+    }
+    return indexPath;
+}
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (self.editAlert == alertView) {
         [self handleEditCategoryWithAlertView:alertView buttonIndex: buttonIndex];
@@ -103,10 +120,6 @@
         cat.name = input;
         NSError *error = nil;
         [self.managedObjectContext save:&error];
-    }
-    if (self.bottomIndexPath) {
-        [self.tableView scrollToRowAtIndexPath:self.bottomIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-        self.bottomIndexPath = nil;
     }
     return cat;
 }

@@ -16,4 +16,6 @@
 
 - (void) getNewCategory:(id) sender;
 - (LOCCategory*) handleAddCategoryWithAlertView:(UIAlertView *)alertView buttonIndex: (NSInteger)buttonIndex;
+- (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex;
+- (NSIndexPath*) scrollToBottom;
 @end

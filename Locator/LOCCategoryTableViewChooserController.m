@@ -42,9 +42,9 @@
 
 - (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    LOCCategory *cat =  [self handleAddCategoryWithAlertView:alertView buttonIndex: buttonIndex];
-    self.selectedCategory = cat;
     self.checkedCell.accessoryType = UITableViewCellAccessoryNone;
+    NSIndexPath *indexPath = [self scrollToBottom];
+    self.selectedCategory = [self.fetchedResultsController objectAtIndexPath:indexPath];
 }
 
 - (void)configureCell:(LOCCategoryCell *)cell atIndexPath:(NSIndexPath *)indexPath
