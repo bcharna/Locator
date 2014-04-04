@@ -7,7 +7,7 @@
 //
 
 #import "LOCNewItemFormViewController.h"
-#import "LOCCategoryTableViewChooserController.h"
+#import "LOCCategoryChooserTableViewController.h"
 #import "LOCChooseCategoryCell.h"
 
 @interface LOCNewItemFormViewController ()
@@ -160,7 +160,7 @@
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 1) {
-        LOCCategoryTableViewChooserController *catVC = [[LOCCategoryTableViewChooserController alloc] initWithStyle:UITableViewStylePlain];
+        LOCCategoryChooserTableViewController *catVC = [[LOCCategoryChooserTableViewController alloc] initWithStyle:UITableViewStylePlain];
         catVC.managedObjectContext = self.managedObjectContext;
         catVC.delegate = self;
         if (self.selectedCategory != nil)

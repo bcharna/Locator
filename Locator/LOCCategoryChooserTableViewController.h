@@ -13,7 +13,7 @@
 - (void)didSelectCategory:(LOCCategory *) category;
 @end
 
-@interface LOCCategoryTableViewChooserController : LOCCategoryTableViewController
+@interface LOCCategoryChooserTableViewController : LOCCategoryTableViewController
 
 @property (nonatomic, weak) id <LOCCategoryTableViewChooserControllerDelegate> delegate;
 @property (nonatomic, strong) LOCCategory *selectedCategory;

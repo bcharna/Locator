@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		561F85BF18E2A10900DFA4AD /* LOCCategoryTableViewChooserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D588A218E276500082170C /* LOCCategoryTableViewChooserController.m */; };
+		561F85BF18E2A10900DFA4AD /* LOCCategoryChooserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 56D588A218E276500082170C /* LOCCategoryChooserTableViewController.m */; };
 		561F85C918EBBB0C00DFA4AD /* locator.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 561F85C818EBBB0C00DFA4AD /* locator.sqlite */; };
 		566383D318BC02F600E81E2C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 566383D218BC02F600E81E2C /* CoreLocation.framework */; };
 		566919AF18E20243005C4954 /* LOCCategoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 566919AE18E20243005C4954 /* LOCCategoryTableViewController.m */; };
@@ -92,8 +92,8 @@
 		56B1223018BBFD2700B6C0D6 /* LOCItemTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOCItemTableViewController.m; sourceTree = "<group>"; };
 		56B1223218BBFEE600B6C0D6 /* LOCNewItemFormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOCNewItemFormViewController.h; sourceTree = "<group>"; };
 		56B1223318BBFEE600B6C0D6 /* LOCNewItemFormViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOCNewItemFormViewController.m; sourceTree = "<group>"; };
-		56D588A118E276500082170C /* LOCCategoryTableViewChooserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOCCategoryTableViewChooserController.h; sourceTree = "<group>"; };
-		56D588A218E276500082170C /* LOCCategoryTableViewChooserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOCCategoryTableViewChooserController.m; sourceTree = "<group>"; };
+		56D588A118E276500082170C /* LOCCategoryChooserTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOCCategoryChooserTableViewController.h; sourceTree = "<group>"; };
+		56D588A218E276500082170C /* LOCCategoryChooserTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOCCategoryChooserTableViewController.m; sourceTree = "<group>"; };
 		56D588A418E27C980082170C /* LOCChooseCategoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LOCChooseCategoryCell.h; sourceTree = "<group>"; };
 		56D588A518E27C980082170C /* LOCChooseCategoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LOCChooseCategoryCell.m; sourceTree = "<group>"; };
 		56D588A618E27C980082170C /* LOCChooseCategoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LOCChooseCategoryCell.xib; sourceTree = "<group>"; };
@@ -167,8 +167,8 @@
 				56B1223018BBFD2700B6C0D6 /* LOCItemTableViewController.m */,
 				566919AD18E20243005C4954 /* LOCCategoryTableViewController.h */,
 				566919AE18E20243005C4954 /* LOCCategoryTableViewController.m */,
-				56D588A118E276500082170C /* LOCCategoryTableViewChooserController.h */,
-				56D588A218E276500082170C /* LOCCategoryTableViewChooserController.m */,
+				56D588A118E276500082170C /* LOCCategoryChooserTableViewController.h */,
+				56D588A218E276500082170C /* LOCCategoryChooserTableViewController.m */,
 				56B1223218BBFEE600B6C0D6 /* LOCNewItemFormViewController.h */,
 				56B1223318BBFEE600B6C0D6 /* LOCNewItemFormViewController.m */,
 			);
@@ -386,7 +386,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				561F85BF18E2A10900DFA4AD /* LOCCategoryTableViewChooserController.m in Sources */,
+				561F85BF18E2A10900DFA4AD /* LOCCategoryChooserTableViewController.m in Sources */,
 				56D588A718E27C980082170C /* LOCChooseCategoryCell.m in Sources */,
 				5675996F18BC47A800EF4C4B /* LOCItem.m in Sources */,
 				5675996C18BC41D400EF4C4B /* LOCLocator.xcdatamodeld in Sources */,

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "LOCItem.h"
-#import "LOCCategoryTableViewChooserController.h"
+#import "LOCCategoryChooserTableViewController.h"
 
 @interface LOCNewItemFormViewController : UIViewController <MKMapViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, LOCCategoryTableViewChooserControllerDelegate>
 

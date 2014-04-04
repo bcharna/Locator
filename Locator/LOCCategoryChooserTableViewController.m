@@ -6,15 +6,15 @@
 //  Copyright (c) 2014 Brad Charna. All rights reserved.
 //
 
-#import "LOCCategoryTableViewChooserController.h"
+#import "LOCCategoryChooserTableViewController.h"
 #import "LOCCategoryCell.h"
 #import "LOCChooseCategoryCell.h"
 
-@interface LOCCategoryTableViewChooserController ()
+@interface LOCCategoryChooserTableViewController ()
 @property (nonatomic, strong) LOCCategoryCell *checkedCell;
 @end
 
-@implementation LOCCategoryTableViewChooserController
+@implementation LOCCategoryChooserTableViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
