@@ -135,6 +135,8 @@
 {
     if (indexPath.row == 0) {
         cell.accessoryType = UITableViewCellAccessoryNone;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     LOCCategory *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.nameLabel.text = item.name;
