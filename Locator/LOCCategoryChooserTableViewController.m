@@ -44,6 +44,8 @@
 {
     // add category
     LOCCategory *cat = [self handleAddCategoryWithAlertView:alertView buttonIndex: buttonIndex];
+    if (!cat) // user presses cancel
+        return;
     self.checkedCell.accessoryType = UITableViewCellAccessoryNone;
     self.selectedCategory = cat;
     [self.tableView reloadRowsAtIndexPaths:@[self.bottomIndexPath] withRowAnimation:NO];

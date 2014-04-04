@@ -104,29 +104,32 @@
     }
 }
 
+// Return nil if user presses cancel
 - (LOCCategory*) handleEditCategoryWithAlertView:(UIAlertView *)alertView buttonIndex: (NSInteger)buttonIndex
 {
-    NSString *input = [[alertView textFieldAtIndex:0] text];
-    LOCCategory* cat = self.editingCategory;
-    cat.name = input;
-    NSError *error;
-    [self.managedObjectContext save:&error];
-    return cat;
+    if(buttonIndex == 1) { //OK button
+        NSString *input = [[alertView textFieldAtIndex:0] text];
+        LOCCategory* cat = self.editingCategory;
+        cat.name = input;
+        NSError *error;
+        [self.managedObjectContext save:&error];
+        return cat;
+    }
+    return nil;
 }
 
+// Return nil if user presses cancel
 - (LOCCategory*) handleAddCategoryWithAlertView:(UIAlertView *)alertView buttonIndex: (NSInteger)buttonIndex
-
 {
-    LOCCategory *cat;
-    if(buttonIndex == 1)//OK button
-    {
+    if(buttonIndex == 1) { //OK button
         NSString *input = [[alertView textFieldAtIndex:0] text];
-        cat = [NSEntityDescription insertNewObjectForEntityForName:@"LOCCategory" inManagedObjectContext:self.managedObjectContext];
+        LOCCategory *cat = [NSEntityDescription insertNewObjectForEntityForName:@"LOCCategory" inManagedObjectContext:self.managedObjectContext];
         cat.name = input;
         NSError *error = nil;
         [self.managedObjectContext save:&error];
+        return cat;
     }
-    return cat;
+    return nil;
 }
 
 - (void) donePressed:(id) sender
