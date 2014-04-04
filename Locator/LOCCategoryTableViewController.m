@@ -22,6 +22,10 @@
     self = [super initWithStyle:style];
     if (self) {
         self.editAlert = [[UIAlertView alloc] initWithTitle:@"Edit Category..." message:nil delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+        self.editAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
+        UITextField *textField = [self.editAlert textFieldAtIndex:0];
+        textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+        textField.autocorrectionType = UITextAutocorrectionTypeDefault;
     }
     return self;
 }
@@ -69,6 +73,8 @@
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     UITextField *textField = [alert textFieldAtIndex:0];
     textField.delegate = self;
+    textField.autocorrectionType = UITextAutocorrectionTypeDefault;
+    textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
     [alert show];
 }
 

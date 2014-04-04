@@ -29,8 +29,7 @@
         self.field.placeholder = @"Name";
         self.field.returnKeyType = UIReturnKeyDone;
         self.field.delegate = self;
-        self.field.autocorrectionType = UITextAutocorrectionTypeNo;
-        self.field.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        self.field.autocapitalizationType = UITextAutocapitalizationTypeWords;
         self.field.clearButtonMode = UITextFieldViewModeWhileEditing;
         [self.field addTarget:self action:@selector(nameFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     }
