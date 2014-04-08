@@ -135,14 +135,29 @@
     [self.tableView beginUpdates];
 }
 
+
+//- (void) tableView:(UITableView *)
+
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
     UITableView *tableView = self.tableView;
     switch(type) {
-            
-        case NSFetchedResultsChangeInsert:
+        case NSFetchedResultsChangeInsert: {
+            [CATransaction begin];
+            [self.tableView beginUpdates];
+            [CATransaction setCompletionBlock: ^{
+                UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:newIndexPath];
+                [UIView animateWithDuration:1.0 animations:^{
+                    cell.backgroundColor = [UIColor greenColor];
+                    [UIView animateWithDuration:1.0 animations:^{
+                        cell.backgroundColor = [UIColor whiteColor];
+                    }];
+                }];
+            }];
             [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView endUpdates];
+            [CATransaction commit];
             break;
-            
+        }
         case NSFetchedResultsChangeDelete:
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
