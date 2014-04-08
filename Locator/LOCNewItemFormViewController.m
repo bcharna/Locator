@@ -175,6 +175,7 @@
     _categoryChooserTVC = [[LOCCategoryChooserTableViewController alloc] initWithStyle:UITableViewStylePlain];
     _categoryChooserTVC.managedObjectContext = self.managedObjectContext;
     _categoryChooserTVC.delegate = self;
+    _categoryChooserTVC.selectedCategory = [LOCCategory defaultCategoryUsingContext: self.managedObjectContext];
     return _categoryChooserTVC;
 }
 
