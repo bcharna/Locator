@@ -7,6 +7,7 @@
 //
 
 #import "LOCItemViewController.h"
+#import "LOCEditItemFormViewController.h"
 
 @interface LOCItemViewController ()
 
@@ -42,7 +43,15 @@
     [self.categoryLabel sizeToFit];
     [self.categoryLabel setNeedsDisplay];
     self.mapView.delegate = self;
+    UIBarButtonItem* editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editPressed:)];
+    self.navigationItem.rightBarButtonItem = editButton;
+}
 
+- (void) editPressed:(id) sender
+{
+    LOCEditItemFormViewController *editItemVC = [[LOCEditItemFormViewController alloc] initWithManagedObjectContext:self.managedObjectContext];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:editItemVC];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning

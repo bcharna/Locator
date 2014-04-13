@@ -19,5 +19,6 @@
 @property (strong, nonatomic) LOCItem *item;
 @property (strong, nonatomic) IBOutlet UILabel *creationDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *categoryLabel;
+@property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 
 @end

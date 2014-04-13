@@ -1,5 +1,5 @@
 //
-//  LOCNewItemFormViewController.h
+//  LOCEditItemFormViewController.h
 //  Locator
 //
 //  Created by Brad Charna on 4/8/14.
@@ -8,6 +8,6 @@
 
 #import "LOCItemFormViewController.h"
 
-@interface LOCNewItemFormViewController : LOCItemFormViewController
+@interface LOCEditItemFormViewController : LOCItemFormViewController
 
 @end

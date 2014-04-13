@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LOCNewItemFormViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LOCItemFormViewController">
             <connections>
                 <outlet property="mapView" destination="WqZ-BK-usl" id="gFe-L1-Dgz"/>
                 <outlet property="table" destination="z9h-L3-LOF" id="2lO-40-mTp"/>

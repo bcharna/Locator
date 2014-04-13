@@ -112,6 +112,7 @@
     LOCItem *item = [self.fetchedResultsController objectAtIndexPath:indexPath];
     LOCItemViewController *viewController = [[LOCItemViewController alloc] init];
     viewController.item = item;
+    viewController.managedObjectContext = self.managedObjectContext;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
