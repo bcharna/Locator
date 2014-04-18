@@ -46,7 +46,6 @@
     UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(donePressed:)];
     self.navigationItem.leftBarButtonItem = doneButton;
     self.title = @"Categories";
-
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {

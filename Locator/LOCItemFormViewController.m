@@ -141,7 +141,6 @@
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil)
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-
         [cell.contentView addSubview:self.field];
     }
     else {
@@ -149,7 +148,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil)
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        }
+    }
     return cell;
 }
 
@@ -159,7 +158,6 @@
         LOCCategoryChooserTableViewController *catVC = [self categoryChooserTVC];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:catVC];
         [self presentViewController:nav animated:YES completion:nil];
- 
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
