@@ -23,11 +23,12 @@
     return self;
 }
 
-- (id) initWithManagedObjectContext: (id) context
+- (id) initWithManagedObjectContext: (id)context category: (LOCCategory*)category name: (NSString*)name
 {
     self = [super initWithManagedObjectContext:context];
     if(self){
-        self.selectedCategory = [LOCCategory defaultCategoryUsingContext: context];
+        [self didSelectCategory:category];
+        self.field.text = name;
     }
     return self;
 }

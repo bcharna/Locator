@@ -11,7 +11,6 @@
 #import "LOCChooseCategoryCell.h"
 
 @interface LOCItemFormViewController ()
-@property (nonatomic,strong) UITextField *field;
 @property BOOL locationRetrieved;
 @property (nonatomic, strong) LOCCategoryChooserTableViewController *categoryChooserTVC;
 @end
@@ -54,7 +53,6 @@
     self.table.dataSource = self;
     self.table.scrollEnabled = NO;
     [self.table reloadData];
-    self.nameField.delegate = self;
     self.saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(submit:)];
     [self.saveButton setEnabled:NO];
     self.navigationItem.rightBarButtonItem = self.saveButton;

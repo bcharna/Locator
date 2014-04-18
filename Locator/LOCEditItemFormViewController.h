@@ -9,5 +9,5 @@
 #import "LOCItemFormViewController.h"
 
 @interface LOCEditItemFormViewController : LOCItemFormViewController
-
+- (id) initWithManagedObjectContext: (id)context category: (LOCCategory*)category name: (NSString*)name;
 @end
