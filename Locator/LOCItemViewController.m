@@ -24,6 +24,12 @@
     return self;
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+    self.nameLabel.text = self.item.name;
+    self.categoryLabel.text = self.item.category.name;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -49,7 +55,7 @@
 
 - (void) editPressed:(id) sender
 {
-    LOCEditItemFormViewController *editItemVC = [[LOCEditItemFormViewController alloc] initWithManagedObjectContext:self.managedObjectContext category:self.item.category name:self.item.name];
+    LOCEditItemFormViewController *editItemVC = [[LOCEditItemFormViewController alloc] initWithManagedObjectContext:self.managedObjectContext item:self.item];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:editItemVC];
     [self presentViewController:nav animated:YES completion:nil];
 }

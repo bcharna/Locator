@@ -10,6 +10,7 @@
 
 @interface LOCEditItemFormViewController ()
 
+@property (strong, nonatomic) LOCItem *item;
 @end
 
 @implementation LOCEditItemFormViewController
@@ -23,12 +24,13 @@
     return self;
 }
 
-- (id) initWithManagedObjectContext: (id)context category: (LOCCategory*)category name: (NSString*)name
+- (id) initWithManagedObjectContext: (id)context item: (LOCItem*)item
 {
     self = [super initWithManagedObjectContext:context];
     if(self){
-        [self didSelectCategory:category];
-        self.field.text = name;
+        [self didSelectCategory:item.category];
+        self.field.text = item.name;
+        self.item = item;
     }
     return self;
 }
@@ -42,6 +44,16 @@
 
 - (void) cancelPressed:(id) sender
 {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)submit:(id) sender
+{
+    self.item.name = self.field.text;
+    self.item.category = self.selectedCategory;
+    self.item.location = self.mapView.userLocation.location;
+    NSError *error = nil;
+    [self.managedObjectContext save:&error];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 

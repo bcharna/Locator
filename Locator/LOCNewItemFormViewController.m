@@ -44,4 +44,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)submit:(id) sender
+{
+    LOCItem *item = [NSEntityDescription insertNewObjectForEntityForName:@"LOCItem" inManagedObjectContext:self.managedObjectContext];
+    item.name = self.field.text;
+    item.category = self.selectedCategory;
+    item.location = self.mapView.userLocation.location;
+    NSError *error = nil;
+    [self.managedObjectContext save:&error];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 @end

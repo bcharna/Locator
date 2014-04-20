@@ -22,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *table;
 @property (nonatomic,strong) LOCCategory *selectedCategory;
 
+- (void)submit:(id) sender;
 - (id) initWithManagedObjectContext: (id) context;
 - (void)didSelectCategory:(LOCCategory *) category;
 @end

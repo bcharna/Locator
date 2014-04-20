@@ -84,13 +84,8 @@
 
 - (void)submit:(id) sender
 {
-    LOCItem *item = [NSEntityDescription insertNewObjectForEntityForName:@"LOCItem" inManagedObjectContext:self.managedObjectContext];
-    item.name = self.field.text;
-    item.category = self.selectedCategory;
-    item.location = self.mapView.userLocation.location;
-    NSError *error = nil;
-    [self.managedObjectContext save:&error];
-    [self.navigationController popViewControllerAnimated:YES];
+    // Subclass determines behavior
+    return;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
