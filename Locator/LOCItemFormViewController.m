@@ -14,7 +14,6 @@
 #import "LOCSwitchUpdateLocationCell.h"
 
 @interface LOCItemFormViewController ()
-@property BOOL locationRetrieved;
 @property (nonatomic, strong) LOCCategoryChooserTableViewController *categoryChooserTVC;
 @end
 
@@ -49,7 +48,6 @@
 {
     [super viewDidLoad];
     self.mapView.delegate = self;
-    self.mapView.showsUserLocation = YES;
     [self.table registerNib:[UINib nibWithNibName:@"LOCChooseCategoryCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"ChooseCategoryCell"];
     [self.table registerNib:[UINib nibWithNibName:@"LOCSwitchUpdateLocationCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"SwitchUpdateLocationCell"];
     self.table.delegate = self;
@@ -146,12 +144,6 @@
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil)
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    } else {
-        CellIdentifier = @"SwitchUpdateLocationCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        if (cell == nil)
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return cell;
 }

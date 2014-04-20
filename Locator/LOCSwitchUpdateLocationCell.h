@@ -10,4 +10,5 @@
 
 @interface LOCSwitchUpdateLocationCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UISwitch *updateLocationSwitch;
 @end

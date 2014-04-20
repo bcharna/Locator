@@ -10,7 +10,7 @@
 #import "LOCEditItemFormViewController.h"
 
 @interface LOCItemViewController ()
-
+@property (nonatomic, strong) MKPointAnnotation *annotation;
 @end
 
 @implementation LOCItemViewController
@@ -28,6 +28,12 @@
 {
     self.nameLabel.text = self.item.name;
     self.categoryLabel.text = self.item.category.name;
+    MKCoordinateRegion mapRegion;
+    mapRegion.center = self.item.location.coordinate;
+    mapRegion.span.latitudeDelta = 0.005;
+    mapRegion.span.longitudeDelta = 0.005;
+    [self.mapView setRegion:mapRegion animated: YES];
+    [self.annotation setCoordinate:self.item.location.coordinate];
 }
 
 - (void)viewDidLoad
@@ -41,6 +47,7 @@
     self.nameLabel.text = self.item.name;
     self.creationDateLabel.text = [self.item creationDateStringFull];
     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    self.annotation = annotation;
     annotation.subtitle = @"Open in Maps";
     [annotation setCoordinate:self.item.location.coordinate];
     [annotation setTitle:self.item.name];

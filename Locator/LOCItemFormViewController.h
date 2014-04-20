@@ -21,8 +21,10 @@
 @property (nonatomic,strong) NSManagedObjectContext* managedObjectContext;
 @property (strong, nonatomic) IBOutlet UITableView *table;
 @property (nonatomic,strong) LOCCategory *selectedCategory;
+@property BOOL locationRetrieved;
 
 - (void)submit:(id) sender;
 - (id) initWithManagedObjectContext: (id) context;
 - (void)didSelectCategory:(LOCCategory *) category;
+- (BOOL)nameEntered;
 @end
