@@ -17,7 +17,8 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    NSString *nibName = @"LOCEditItemFormViewController";
+    self = [super initWithNibName:nibName bundle:nibBundleOrNil];
     if (self) {
         self.title = @"Edit Item";
     }
@@ -61,6 +62,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+// Customize the number of rows in the table view.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 3;
 }
 
 @end

@@ -1,6 +1,8 @@
 //
 //  LOCItemFormViewController.m
 //  Locator
+//  NOTE this class is meant to be abstract.
+//  Use either LOCNewItemFormViewController or LOCEditItemFormViewController
 //
 //  Created by Brad Charna on 2/24/14.
 //  Copyright (c) 2014 Brad Charna. All rights reserved.
@@ -9,6 +11,7 @@
 #import "LOCItemFormViewController.h"
 #import "LOCCategoryChooserTableViewController.h"
 #import "LOCChooseCategoryCell.h"
+#import "LOCSwitchUpdateLocationCell.h"
 
 @interface LOCItemFormViewController ()
 @property BOOL locationRetrieved;
@@ -19,8 +22,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    NSString *nibName = @"LOCItemFormViewController";
-    self = [super initWithNibName:nibName bundle:nibBundleOrNil];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         CGRect myFrame = [self.view frame];
         self.field = [[UITextField alloc] initWithFrame:CGRectMake([self.table separatorInset].left, 0, myFrame.size.width - 25, 60)];
@@ -49,6 +51,7 @@
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
     [self.table registerNib:[UINib nibWithNibName:@"LOCChooseCategoryCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"ChooseCategoryCell"];
+    [self.table registerNib:[UINib nibWithNibName:@"LOCSwitchUpdateLocationCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"SwitchUpdateLocationCell"];
     self.table.delegate = self;
     self.table.dataSource = self;
     self.table.scrollEnabled = NO;
@@ -119,7 +122,7 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return 0; // subclasses must implement this method
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -138,11 +141,17 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         [cell.contentView addSubview:self.field];
     }
-    else {
+    else if (indexPath.row == 1) {
         CellIdentifier = @"ChooseCategoryCell";
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil)
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    } else {
+        CellIdentifier = @"SwitchUpdateLocationCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil)
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return cell;
 }
